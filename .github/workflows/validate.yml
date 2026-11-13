@@ -1,0 +1,36 @@
+name: Validate plugin marketplaces
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install validator dependencies
+        run: pip install pyyaml
+
+      - name: Plugin copies match skills/ and assets/
+        run: python3 scripts/sync.py --check
+
+      - name: Run validate.py
+        run: python3 scripts/validate.py
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Claude Code validates the marketplace
+        run: npx -y @anthropic-ai/claude-code plugin validate .

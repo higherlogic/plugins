@@ -1,0 +1,20 @@
+{
+  "name": "higherlogic",
+  "interface": {
+    "displayName": "Higher Logic"
+  },
+  "plugins": [
+    {
+      "name": "gateway",
+      "source": {
+        "source": "local",
+        "path": "./plugins/gateway"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

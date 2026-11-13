@@ -1,0 +1,8 @@
+interface:
+  display_name: Ask gateway
+  short_description: "The @gateway default: run an instruction against a Higher Logic tenant"
+  default_prompt: "Use $ask-gateway: find contact jane@example.com in hug and list her community memberships"
+  icon_small: assets/logo.png
+  icon_large: assets/logo.png
+policy:
+  allow_implicit_invocation: true

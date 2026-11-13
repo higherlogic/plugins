@@ -1,0 +1,16 @@
+{
+  "name": "higherlogic",
+  "description": "Higher Logic plugins for Claude Code",
+  "owner": {
+    "name": "Higher Logic"
+  },
+  "plugins": [
+    {
+      "name": "gateway",
+      "source": "./plugins/claude/gateway",
+      "description": "Work with a Higher Logic customer's data through the Higher Logic gateway: contacts, communities, orders and payments, the knowledge base, and support requests, for the tenant you choose.",
+      "version": "0.1.0",
+      "category": "productivity"
+    }
+  ]
+}

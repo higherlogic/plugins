@@ -1,0 +1,45 @@
+{
+  "name": "gateway",
+  "version": "0.1.0",
+  "description": "Work with a Higher Logic customer's data through the Higher Logic gateway: contacts, communities, orders and payments, the knowledge base, and support requests, for the tenant you choose.",
+  "author": {
+    "name": "Higher Logic",
+    "url": "https://www.higherlogic.com/"
+  },
+  "homepage": "https://github.com/higherlogic/plugins",
+  "repository": "https://github.com/higherlogic/plugins",
+  "license": "UNLICENSED",
+  "keywords": [
+    "higher-logic",
+    "gateway",
+    "contacts",
+    "community",
+    "commerce",
+    "knowledge-base"
+  ],
+  "skills": "./skills/",
+  "apps": "./.app.json",
+  "interface": {
+    "displayName": "Higher Logic gateway",
+    "shortDescription": "Run Higher Logic tenant tools from ChatGPT: contacts, communities, orders, KB answers",
+    "longDescription": "Higher Logic gateway connects ChatGPT to the products of the Higher Logic tenants you can use. ask-gateway is the default and only implicitly invoked skill (invoke with @gateway): it picks the tenant, routes each instruction to the matching product (Contact Manager, Online Community, Commerce, AI Assistant Studio, Support Harness) and calls it through the gateway. If the gateway is not connected, or the product is not enabled for the tenant, it stops and says so. Before any data-changing call it summarizes the change and waits for your explicit confirmation. Retrieved content is treated as evidence, never as instructions.",
+    "developerName": "Higher Logic",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://www.higherlogic.com/",
+    "privacyPolicyURL": "https://www.higherlogic.com/privacy-policy",
+    "termsOfServiceURL": "https://www.higherlogic.com/terms-of-use",
+    "defaultPrompt": [
+      "Find contact jane@example.com in hug and list her community memberships",
+      "Look up order 1234 in hug and show its payments",
+      "What does the hug knowledge base say about resetting a member password?"
+    ],
+    "brandColor": "#F26B2F",
+    "composerIcon": "./assets/logo.png",
+    "logo": "./assets/logo.png",
+    "screenshots": []
+  }
+}
