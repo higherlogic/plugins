@@ -53,7 +53,7 @@ python3 scripts/validate.py      # what CI runs
 
 | Host | How |
 | --- | --- |
-| ChatGPT | Admin Console > Plugins > Add > **Import marketplace**. Source `https://github.com/higherlogic/plugins`, Path **`chatgpt`** (not the repo root — root imports the Claude plugin and marks it Desktop only), Branch `main`. Then open the plugin, set its installation policy, and enable the existing gateway app (`plugin_asdk_app_…`) for the roles that need it. Sync runs daily, or click **Sync now**. |
+| ChatGPT | Admin Console > Plugins > Add > **Import marketplace**. Source `https://github.com/higherlogic/plugins`, Path **`chatgpt`** (not the repo root — root imports the Claude plugin and marks it Desktop only), Branch `main`. Then open the plugin, set its installation policy, and enable the existing gateway app for the roles that need it. `.app.json` uses the bare `asdk_app_…` id (admin URL without the `plugin_` prefix). Sync runs daily, or click **Sync now**. |
 | Claude Code | `claude plugin marketplace add higherlogic/plugins`, then `claude plugin install gateway@higherlogic`. |
 | Cursor | Dashboard > Plugins > Team Marketplaces > **Import from Repo**: `https://github.com/higherlogic/plugins`. |
 
