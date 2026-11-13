@@ -1,5 +1,11 @@
 {
   "mcp_url": "https://mcp.us.higherlogic.com/mcp",
-  "chatgpt_app_id": "asdk_app_6af6278414d48191a66133dfcc119fbc",
-  "products": ["cm", "oc", "ec", "kb", "sh"]
+  "chatgpt_app_id": "plugin_asdk_app_6af6278414d48191a66133dfcc119fbc",
+  "products": [
+    "cm",
+    "oc",
+    "ec",
+    "kb",
+    "sh"
+  ]
 }

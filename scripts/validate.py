@@ -39,7 +39,9 @@ except ImportError:
 
 SEMVER = re.compile(r"^\d+\.\d+\.\d+$")
 KEBAB = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
-APP_ID = re.compile(r"^asdk_app_[0-9a-f]{32}$")
+# OpenAI's packaging docs: .app.json must reference the registered MCP app's
+# technical id from the admin URL, which starts with plugin_asdk_app_.
+APP_ID = re.compile(r"^plugin_asdk_app_[0-9a-f]{32}$")
 PLUGIN_ID = re.compile(r"^plugin_[A-Za-z0-9_]+$")
 PRODUCT_LINE = re.compile(r"\*\*Product:\*\*\s*`([a-z0-9_-]+)`")
 MD_LINK = re.compile(r"\]\((\.?/?[A-Za-z0-9_./-]+\.(?:md|svg|png|yaml|json))\)")
@@ -238,7 +240,7 @@ def check_codex(r: Report, gateway: dict) -> tuple[list[dict], list[dict]]:
             else:
                 app_id = (apps["gateway"] or {}).get("id", "")
                 if not APP_ID.match(app_id):
-                    r.err(f"{rel(app_path)}: id {app_id!r} must be asdk_app_ + 32 hex chars (drop the plugin_ prefix)")
+                    r.err(f"{rel(app_path)}: id {app_id!r} must be plugin_asdk_app_ + 32 hex chars (the admin URL id)")
                 elif app_id != gateway.get("chatgpt_app_id"):
                     r.err(f"{rel(app_path)}: id {app_id!r} != gateway.json chatgpt_app_id")
         check_skills(r, d, d / str(man.get("skills", "./skills/")).removeprefix("./"), openai=True)
@@ -336,7 +338,7 @@ def check_gateway(r: Report) -> dict:
     if not re.match(r"^https://[a-z0-9.-]+/mcp$", str(url)):
         r.err(f"gateway.json: mcp_url {url!r} must be https://<host>/mcp")
     if not APP_ID.match(str(gateway.get("chatgpt_app_id", ""))):
-        r.err("gateway.json: chatgpt_app_id must be asdk_app_ + 32 hex chars")
+        r.err("gateway.json: chatgpt_app_id must be plugin_asdk_app_ + 32 hex chars")
     products = gateway.get("products")
     if not (isinstance(products, list) and products and all(isinstance(p, str) and p for p in products)):
         r.err("gateway.json: products must be a non-empty list of product codes")
