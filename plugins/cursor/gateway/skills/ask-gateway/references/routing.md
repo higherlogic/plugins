@@ -4,6 +4,12 @@ Match the user's instruction to one domain below. If none matches, or more than 
 
 Tool names below were read from `search_tools` and are examples, not a closed list: always confirm with `search_tools` / `describe_tool` (or `list_capabilities` for Contact Manager) before calling. A tool that discovery does not return for this tenant does not exist for it.
 
+## Access and authorize links
+
+- **"What can I use?" / access inventory:** `list_access` for the tenant (optional `detail=capabilities` + `domain`).
+- **"Enable X" / "authorize Y" / missing Agent or app auth:** `request_access` with `product`+`surface`, `domain` (agent code), and/or `capability`. Show the user the returned authorize/Connections links; do not enable Agents or capabilities via MCP.
+- A product can be granted while its Agent is still unchecked (for example Contact Manager product MCP vs Contact Management agent). Prefer `list_access` over guessing when tools are missing or empty.
+
 ## Read or data-changing
 
 - **Read-only:** a tool whose name starts with `get_`, `list_`, `search_`, `find_`, `lookup_`, `count_`, or `query_`, or a Contact Manager capability with `kind: lookup` and `destructive: false`.
