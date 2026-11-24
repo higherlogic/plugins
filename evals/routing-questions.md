@@ -26,9 +26,9 @@ Manual eval rows for `ask-gateway`. Run each instruction in a fresh chat with th
 | 20 | draft a reply to jane@example.com | none | negative: bare email | no | ask-gateway does not load |
 | 21 | summarize this support ticket | none | negative: bare ticket | no | ask-gateway does not load |
 | 22 | find jane@example.com in hug and show her last order | none | positive: named tenant + record | yes | Loads ask-gateway; `cm` read, then `ec` read |
-| 23 | find jane@example.com in hug (tenant has two instances of `oc`) | @gateway | instance | yes | Asks which instance, or passes the named `instance`; never guesses |
+| 23 | list communities in hug (tenant has two instances of `oc`) | @gateway | instance | yes | Asks which instance (or passes `instance` if named); never guesses |
 | 24 | that answer was wrong (after any lookup) | none | feedback | yes | Offers to send feedback; calls `submit_feedback` only after the user agrees |
-| 25 | don't record my requests | none | capture opt-out | yes | Calls `capture_preference` with `opted_out: true` and reports the setting |
+| 25 | don't record my requests (after any lookup) | none | capture opt-out | yes | Calls `capture_preference` with `opted_out: true` and reports the setting |
 
 ## Manual checks
 
