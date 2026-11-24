@@ -26,9 +26,17 @@ Manual eval rows for `ask-gateway`. Run each instruction in a fresh chat with th
 | 20 | draft a reply to jane@example.com | none | negative: bare email | no | ask-gateway does not load |
 | 21 | summarize this support ticket | none | negative: bare ticket | no | ask-gateway does not load |
 | 22 | find jane@example.com in hug and show her last order | none | positive: named tenant + record | yes | Loads ask-gateway; `cm` read, then `ec` read |
-| 23 | find jane@example.com in hug (tenant has two instances of `oc`) | @gateway | instance | yes | Asks which instance, or passes the named `instance`; never guesses |
+| 23 | list communities in hug (tenant has two instances of `oc`) | @gateway | instance | yes | Asks which instance (or passes `instance` if named); never guesses |
 | 24 | that answer was wrong (after any lookup) | none | feedback | yes | Offers to send feedback; calls `submit_feedback` only after the user agrees |
-| 25 | don't record my requests | none | capture opt-out | yes | Calls `capture_preference` with `opted_out: true` and reports the setting |
+| 25 | don't record my requests (after any lookup) | none | capture opt-out | yes | Calls `capture_preference` with `opted_out: true` and reports the setting |
+
+| 26 | help me onboard a new member in hug (skill exists for onboarding) | @gateway | skill-first hit | yes | Calls `list_skills` / `get_skill` first; follows the skill; does not jump straight to raw product tools |
+| 27 | what capabilities can I use for events in hug (no skill) | @gateway | capability fallback | yes | After skills miss, uses `route_question` / `select_domain` or `search_tools` with `product=capabilities` |
+| 28 | list hug's product catalog tools for Commerce via MCP/API (no skill or capability) | @gateway | product MCP/API fallback | yes | Falls through to `list_catalog` / `find_servers` then `search_tools` for `ec` |
+| 29 | update a contact field that returns form_required | @gateway | form pre-filled | yes | Calls `open_tool_form` with the `form_session_id`; form shows defaults plus proposed values; waits for the user |
+| 30 | call a tool missing a required argument (form mode not never) | @gateway | missing required → form | yes | Receives `form_required` (or opens the form) instead of inventing the value |
+| 31 | user cancels the tool form | @gateway | form cancel | yes | Reports cancellation; does not call the underlying tool; does not invent values |
+| 32 | user submits the tool form | @gateway | form submit | yes | Form submit runs the tool (via `submit_tool_form`); still honours any later `approval_id` / `connect_required` |
 
 ## Manual checks
 
