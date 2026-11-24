@@ -4,6 +4,18 @@ Match the user's instruction to one domain below. If none matches, or more than 
 
 Tool names below were read from `search_tools` and are examples, not a closed list: always confirm with `search_tools` / `describe_tool` (or `list_capabilities` for Contact Manager) before calling. A tool that discovery does not return for this tenant does not exist for it.
 
+## Discovery waterfall
+
+After the tenant is chosen, prefer in this order:
+
+1. **Skills** — `list_skills` / `get_skill` for tenant skills that already encode how to use tools.
+2. **Capabilities** — `route_question` / `select_domain` / `search_tools(product="capabilities")` / `list_capabilities` / `list_widgets`.
+3. **Products** — `list_catalog` / `find_servers`, then product MCP (`mcp_http`) or API (`api_proxy`) tools via `search_tools` / `describe_tool` / `call_tool`.
+
+## Tool forms
+
+When `call_tool` returns `status: form_required`, call `open_tool_form` with the `form_session_id` so the user reviews pre-filled defaults and your proposed values. Do not invent missing required fields. After they submit, honour any `approval_id` or `connect_required` the same way as a normal call.
+
 ## Access and authorize links
 
 - **"What can I use?" / access inventory:** `list_access` for the tenant (optional `detail=capabilities` + `domain`).
