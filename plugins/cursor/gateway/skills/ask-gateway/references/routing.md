@@ -10,6 +10,10 @@ Tool names below were read from `search_tools` and are examples, not a closed li
 - **"Enable X" / "authorize Y" / missing Agent or app auth:** `request_access` with `product`+`surface`, `domain` (agent code), and/or `capability`. Show the user the returned authorize/Connections links; do not enable Agents or capabilities via MCP.
 - A product can be granted while its Agent is still unchecked (for example Contact Manager product MCP vs Contact Management agent). Prefer `list_access` over guessing when tools are missing or empty.
 
+## Tenant-level tools (no product)
+
+`list_tasks`, `run_task`, `get_task_run`, `list_access`, `request_access`, `request_staff_access`, `end_staff_access`, `submit_feedback` and `capture_preference` take a `tenant` and no product. `run_task` is data-changing: summarize and confirm before starting a task, and treat an `approval_id` like `call_tool`'s. Poll `get_task_run` (it can wait up to 20 seconds) instead of re-running a task.
+
 ## Read or data-changing
 
 - **Read-only:** a tool whose name starts with `get_`, `list_`, `search_`, `find_`, `lookup_`, `count_`, or `query_`, or a Contact Manager capability with `kind: lookup` and `destructive: false`.
@@ -51,6 +55,10 @@ Tool names below were read from `search_tools` and are examples, not a closed li
 - **Product:** `sh` (Support Harness).
 - **Trigger phrases:** "support request", "ticket", "open a ticket for ...", "investigation".
 - Tool names are not recorded here yet: discover them with `search_tools` for the tenant. If the call fails with "no grant", stop and say this login has no Support Harness access for the tenant.
+
+## Other catalog products
+
+`list_catalog` can list products beyond the five above (for example the virtual `capabilities` product, or a tenant's own MCP servers and API proxies). When the instruction clearly belongs to one of those, discover with `search_tools` and apply the same read or data-changing rules. Do not route to a product this file does not describe when one of the five above fits.
 
 ## Not available through the gateway
 
